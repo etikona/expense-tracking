@@ -1,0 +1,70 @@
+/* Global Font Import */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+/* Home Page Container */
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f7fa; /* Light Gray Background */
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Home Content */
+.home-content {
+  max-width: 600px;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eaeaea;
+}
+
+/* Title */
+.home-title {
+  font-size: 2.5rem;
+  color: #333333; /* Dark Gray */
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 1rem;
+}
+
+/* Description */
+.home-description {
+  font-size: 1.2rem;
+  color: #555555;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+.home-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.home-btn {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  background-color: #4a90e2; /* Vivid Blue */
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.home-btn:hover {
+  background-color: #3a7ec2; /* Darker Blue */
+}
+
+.home-btn.secondary {
+  background-color: #4e8075; /* Teal Green */
+}
+
+.home-btn.secondary:hover {
+  background-color: #3ec2a3; /* Darker Teal Green */
+}
