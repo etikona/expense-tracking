@@ -1,9 +1,5 @@
-/* Import Google Font */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
-
-/* Navbar Container */
 .navbar {
-  background-color: #1a73e8; /* Modern blue */
+  background-color: #1a73e8;
   padding: 0.5rem 1rem;
   display: flex;
   justify-content: center;
@@ -22,7 +18,6 @@
   align-items: center;
 }
 
-/* Logo */
 .navbar-logo {
   color: white;
   font-size: 1.8rem;
@@ -31,7 +26,6 @@
   text-decoration: none;
 }
 
-/* Links */
 .navbar-links {
   list-style: none;
   display: flex;
@@ -48,10 +42,9 @@
 }
 
 .navbar-links li a:hover {
-  color: #b3d4fc; /* Light blue hover effect */
+  color: #b3d4fc;
 }
 
-/* Mobile Menu Toggle Button */
 .navbar-toggle {
   display: none;
   background: none;

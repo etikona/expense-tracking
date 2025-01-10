@@ -1,31 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const initialState = {
-  expenses: [],
-};
-
-const expensesSlice = createSlice({
-  name: "expenses",
-  initialState,
-  reducers: {
-    addExpense: (state, action) => {
-      state.expenses.push(action.payload);
-    },
-    updateExpense: (state, action) => {
-      const { id, updatedExpense } = action.payload;
-      const index = state.expenses.findIndex((expense) => expense.id === id);
-      if (index !== -1) {
-        state.expenses[index] = { ...state.expenses[index], ...updatedExpense };
+export const addExpense = createAsyncThunk(
+  "expenses/addExpense",
+  async (expenseData) => {
+    const response = await fetch(
+      "https://expense-back-f70o.onrender.com/api/expenses",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(expenseData),
       }
-    },
-    removeExpense: (state, action) => {
-      state.expenses = state.expenses.filter(
-        (expense) => expense.id !== action.payload.id
-      );
-    },
+    );
+    return response.json();
+  }
+);
+
+const expenseSlice = createSlice({
+  name: "expenses",
+  initialState: { items: [], limits: {} },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(addExpense.fulfilled, (state, action) => {
+      state.items.push(action.payload);
+    });
   },
 });
 
-export const { addExpense, updateExpense, removeExpense } =
-  expensesSlice.actions;
-export default expensesSlice.reducer;
+export default expenseSlice.reducer;

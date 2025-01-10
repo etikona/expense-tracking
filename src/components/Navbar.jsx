@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import "./Navbar.css";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -13,11 +14,10 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <a href="/" className="navbar-logo">
+        <Link href="/" className="navbar-logo">
           Expense Tracker
-        </a>
+        </Link>
 
-        {/* Desktop Menu */}
         <ul className={`navbar-links ${isMobileMenuOpen ? "active" : ""}`}>
           <li>
             <a href="/">Home</a>
@@ -26,11 +26,19 @@ const Navbar = () => {
             <a href="/summary">Summary</a>
           </li>
           <li>
-            <a href="/settings">Settings</a>
+            <a href="/settings">Set Limits</a>
+          </li>
+          <li>
+            <a href="/expenses">Expense</a>
+          </li>
+          <li>
+            <a href="/login">Login</a>
+          </li>
+          <li>
+            <a href="/register">Register</a>
           </li>
         </ul>
 
-        {/* Mobile Menu Button */}
         <button className="navbar-toggle" onClick={toggleMobileMenu}>
           <span className="navbar-toggle-icon"></span>
         </button>

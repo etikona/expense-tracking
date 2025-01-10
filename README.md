@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Expense Tracking Web Application
 
-## Getting Started
+Project Overview
 
-First, run the development server:
+The Expense Tracking Web Application is designed to help users track and manage their daily expenses across multiple categories. This dynamic application allows users to set spending limits, view categorized expense summaries, and receive alerts when spending exceeds predefined limits. It utilizes a modern tech stack, including Next.js (App Router), Redux Toolkit, Node.js (Express), and MongoDB Atlas for a seamless user experience.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Frontend
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Expense Input: Users can add expenses with details like category, purpose, date, and amount.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Summary View: Displays daily categorized expense summaries with hover-based tooltips.
 
-## Learn More
+Spending Limit: Users can set monthly and category-specific spending limits.
 
-To learn more about Next.js, take a look at the following resources:
+Real-Time Alerts: Prevents adding expenses that exceed limits and displays appropriate alerts.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Modern UI: Styled with raw CSS, leveraging a modern color palette and responsive design.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Backend
 
-## Deploy on Vercel
+API Endpoints: Provides RESTful API routes to manage expense and limit data.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Database Integration: Uses MongoDB Atlas for secure and scalable data storage.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Validation: Ensures robust input validation for expense and limit categories.
+
+Tech Stack
+
+Frontend
+
+Framework: Next.js (App Router)
+
+State Management: Redux Toolkit
+
+Styling: Raw CSS
+
+Animation: Framer Motion
+
+Backend
+
+Server Framework: Node.js with Express.js
+
+Database: MongoDB Atlas
+
+Middleware: Body-Parser, CORS
+
+Environment Variables: Dotenv

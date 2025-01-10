@@ -1,53 +1,113 @@
-/* src/styles/settings.css */
-.settings-container {
-  padding: 2rem;
-  max-width: 600px;
+.settings-page {
+  font-family: "Poppins", sans-serif;
+  padding: 30px;
+  max-width: 800px;
   margin: 0 auto;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-h1 {
+.settings-page:hover {
+  transform: scale(1.02);
+}
+
+h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-form {
+.fetch-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 20px 0;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.fetch-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.limits-form {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+.limit-input {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .limit-input label {
-  font-weight: bold;
+  font-size: 16px;
+  font-weight: 500;
+  color: #555;
+  width: 30%;
 }
 
 .limit-input input {
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  width: 60%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: border 0.3s ease;
+  box-sizing: border-box;
 }
 
-.buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 2rem;
+.limit-input input:focus {
+  border-color: #4caf50;
 }
 
-.buttons button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  cursor: pointer;
+.save-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #1a73e8;
+  color: white;
+  font-size: 16px;
   border: none;
-  border-radius: 4px;
-  transition: background-color 0.3s;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.buttons button:hover {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.buttons button:active {
+.save-btn:hover {
   background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .settings-page {
+    padding: 20px;
+  }
+
+  .limit-input input {
+    width: 70%;
+  }
+
+  .save-btn,
+  .fetch-btn {
+    padding: 15px;
+  }
 }

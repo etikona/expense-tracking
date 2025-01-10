@@ -1,14 +1,11 @@
-"use client";
 import { configureStore } from "@reduxjs/toolkit";
 // import limitReducer from "./slice/limitSlice";
 import limitReducer from "./slice/limitsSlice";
 import expensesReducer from "./slice/expensesSlice";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    limit: limitReducer,
+    limits: limitReducer,
     expenses: expensesReducer,
   },
 });
-
-export default store;

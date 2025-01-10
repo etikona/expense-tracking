@@ -1,117 +1,74 @@
-// src/app/settings/page.js
-
 "use client";
 
-import { useSelector, useDispatch } from "react-redux";
-import { setLimit, resetLimits } from "@/store/slice/limitsSlice";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setLimit } from "@/store/slice/limitsSlice";
+import { toast } from "react-toastify";
+import "./settings.css";
 
-export default function SettingsPage() {
+const LimitPage = () => {
   const dispatch = useDispatch();
-  const limits = useSelector((state) => state.limit);
+  const limits = useSelector((state) => state.limits?.limits);
+  const [formData, setFormData] = useState({
+    groceries: limits?.groceries || "",
+    transportation: limits?.transportation || "",
+    healthcare: limits?.healthcare || "",
+    utility: limits?.utility || "",
+    charity: limits?.charity || "",
+    miscellaneous: limits?.miscellaneous || "",
+  });
+  const [loading, setLoading] = useState(false);
 
-  const [newLimits, setNewLimits] = useState(limits);
-  const [alert, setAlert] = useState("");
-
-  // Fetch current limits from backend
-  useEffect(() => {
-    const fetchLimits = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/limits");
-        setNewLimits(response.data);
-
-        // Update Redux state with the fetched limits
-        Object.keys(response.data).forEach((category) => {
-          dispatch(setLimit({ category, limit: response.data[category] }));
-        });
-      } catch (error) {
-        console.error("Error fetching limits:", error);
-      }
-    };
-    fetchLimits();
-  }, [dispatch]);
-
-  // Handle form input change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewLimits((prevLimits) => ({
-      ...prevLimits,
-      [name]: parseFloat(value) || 0, // Ensure it's a number
-    }));
+  const handleLimitChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Save updated limits to both Redux and backend
-  const handleSave = async () => {
+  //* Save limits to Redux and Backend
+  const handleLimits = (e) => {
+    e.preventDefault();
+    setLoading(true);
     try {
-      const updatedLimits = { ...newLimits };
-
-      // Check if any category's new limit is less than the current expenses
-      const totalExpenses = {}; // Assuming total expenses will be available from the Redux store or backend
-      let exceededCategory = null;
-      Object.keys(updatedLimits).forEach((category) => {
-        const expenseLimit = updatedLimits[category];
-        const currentExpense = totalExpenses[category] || 0;
-
-        if (expenseLimit < currentExpense) {
-          exceededCategory = category;
+      for (const [category, limit] of Object.entries(formData)) {
+        if (limit && limit > 0) {
+          dispatch(setLimit({ category, limit: parseInt(limit, 10) }));
         }
-      });
-
-      if (exceededCategory) {
-        setAlert(
-          `The limit for ${exceededCategory} cannot be less than the current expenses.`
-        );
-        return;
+        console.log("Category:", category, "limit", limit);
       }
-
-      await axios.put("http://localhost:5000/api/limits", updatedLimits);
-
-      // Update Redux state with the new limits
-      Object.entries(updatedLimits).forEach(([category, limit]) => {
-        dispatch(setLimit({ category, limit }));
-      });
-      setAlert("Limits updated successfully!");
+      toast.success("Limits set successfully");
     } catch (error) {
-      console.error("Error saving limits:", error);
-      setAlert("Failed to save limits");
+      toast.error("Failed to set limits");
+      console.error("Failed to set limits", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // Reset to initial Redux state
-  const handleReset = () => {
-    setNewLimits(limits);
-    dispatch(resetLimits());
-  };
-
   return (
-    <div className="settings-container">
-      <h1>Set Spending Limits</h1>
-      <form>
-        {Object.keys(newLimits).map((category) => (
-          <div key={category} className="limit-input">
-            <label>
-              {category.charAt(0).toUpperCase() + category.slice(1)}:
-              <input
-                type="number"
-                name={category}
-                value={newLimits[category]}
-                onChange={handleChange}
-                min="0"
-              />
+    <div className="settings-page">
+      <h2>Set Your Monthly Spending Limits</h2>
+      <form onSubmit={handleLimits} className="limits-form">
+        {Object.keys(formData).map((category) => (
+          <div className="limit-input" key={category}>
+            <label htmlFor={category}>
+              {category.charAt(0).toUpperCase() + category.slice(1)}
             </label>
+            <input
+              type="number"
+              id={category}
+              name={category}
+              value={formData[category]}
+              onChange={handleLimitChange}
+              min="0"
+              placeholder={`Enter limit for ${category}`}
+            />
           </div>
         ))}
+        <button type="submit" className="save-btn" disabled={loading}>
+          {loading ? "Saving..." : "Save Limits"}
+        </button>
       </form>
-      {alert && <div className="alert">{alert}</div>}
-      <div className="buttons">
-        <button type="button" onClick={handleSave}>
-          Save Limits
-        </button>
-        <button type="button" onClick={handleReset}>
-          Reset Limits
-        </button>
-      </div>
     </div>
   );
-}
+};
+
+export default LimitPage;

@@ -19,12 +19,12 @@ const HomePage = () => {
         </p>
         <div className="home-buttons">
           <motion.a
-            href="/summary"
+            href="/expense"
             className="home-btn"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            View Summary
+            Input your expenses
           </motion.a>
           <motion.a
             href="/settings"
